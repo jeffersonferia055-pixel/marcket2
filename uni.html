@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReHub Marketplace Externo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    /* Colores personalizados */
+    .btn-primary {
+      background-color: #68A542 !important;
+      border-color: #68A542 !important;
+    }
+    .btn-outline-primary {
+      color: #68A542 !important;
+      border-color: #68A542 !important;
+    }
+    .btn-outline-primary:hover {
+      background-color: #68A542 !important;
+      color: white !important;
+    }
+    .text-primary {
+      color: #68A542 !important;
+    }
+    .bg-primary {
+      background-color: #68A542 !important;
+    }
+    .list-group-item.active {
+      background-color: #68A542 !important;
+      border-color: #68A542 !important;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="#">ReHub</a>
+      <form class="d-flex ms-auto me-3">
+        <input class="form-control me-2" type="search" placeholder="Buscar productos">
+        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+      </form>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">
+        <i class="bi bi-cart"></i> Carrito <span class="badge bg-danger" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="bg-success text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4">Compra recursos industriales a bajo costo</h1>
+      <p class="lead">Dale nueva vida a inventarios inactivos con precios exclusivos</p>
+    </div>
+  </section>
+
+  <!-- Layout con barra lateral -->
+  <div class="container-fluid py-5">
+    <div class="row">
+      <!-- Categorías (izquierda) -->
+      <div class="col-md-3">
+        <div class="list-group" id="categoryList">
+          <button class="list-group-item list-group-item-action active" data-bs-toggle="tab" data-bs-target="#papel">Bobinas de Papel</button>
+          <button class="list-group-item list-group-item-action" data-bs-toggle="tab" data-bs-target="#maquinaria">Maquinaria</button>
+          <button class="list-group-item list-group-item-action" data-bs-toggle="tab" data-bs-target="#repuestos">Repuestos</button>
+          <button class="list-group-item list-group-item-action" data-bs-toggle="tab" data-bs-target="#computadores">Computadores</button>
+        </div>
+      </div>
+
+      <!-- Productos (derecha) -->
+      <div class="col-md-9">
+        <div class="tab-content">
+
+          <!-- Bobinas -->
+          <div class="tab-pane fade show active" id="papel">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <img src="WhatsApp Image 2025-08-27 at 8.16.19 AM (1).jpeg" class="card-img-top" alt="Bobina Kraft 1">
+                  <div class="card-body">
+                    <h5 class="card-title">Bobina Kraft</h5>
+                    <p class="card-text">Papel kraft industrial en rollo.</p>
+                    <p class="fw-bold">$1.200.000 COP</p>
+                    <button class="btn btn-outline-primary w-100 add-to-cart" data-name="Bobina Kraft" data-price="1200000">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <img src="WhatsApp Image 2025-08-27 at 8.16.19 AM.jpeg" class="card-img-top" alt="Bobina Kraft 2">
+                  <div class="card-body">
+                    <h5 class="card-title">Bobina Kraft Dañada</h5>
+                    <p class="card-text">Rollo con daño en el borde.</p>
+                    <p class="fw-bold">$950.000 COP</p>
+                    <button class="btn btn-outline-primary w-100 add-to-cart" data-name="Bobina Kraft Dañada" data-price="950000">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Maquinaria -->
+          <div class="tab-pane fade" id="maquinaria">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <img src="WhatsApp Image 2025-08-27 at 8.15.38 AM (5).jpeg" class="card-img-top" alt="Maquinaria Recubierta">
+                  <div class="card-body">
+                    <h5 class="card-title">Maquinaria Recubierta</h5>
+                    <p class="card-text">Estructura industrial envuelta.</p>
+                    <p class="fw-bold">$3.500.000 COP</p>
+                    <button class="btn btn-outline-primary w-100 add-to-cart" data-name="Maquinaria Recubierta" data-price="3500000">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <img src="WhatsApp Image 2025-08-27 at 8.17.11 AM.jpeg" class="card-img-top" alt="Estibador Hidráulico">
+                  <div class="card-body">
+                    <h5 class="card-title">Estibador Hidráulico</h5>
+                    <p class="card-text">Estibador manual funcional.</p>
+                    <p class="fw-bold">$600.000 COP</p>
+                    <button class="btn btn-outline-primary w-100 add-to-cart" data-name="Estibador Hidráulico" data-price="600000">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repuestos -->
+          <div class="tab-pane fade" id="repuestos">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <img src="WhatsApp Image 2025-08-27 at 8.15.38 AM (6).jpeg" class="card-img-top" alt="Rodillos">
+                  <div class="card-body">
+                    <h5 class="card-title">Rodillos Industriales</h5>
+                    <p class="card-text">Lote de repuestos metálicos para máquina.</p>
+                    <p class="fw-bold">$900.000 COP</p>
+                    <button class="btn btn-outline-primary w-100 add-to-cart" data-name="Rodillos Industriales" data-price="900000">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <img src="WhatsApp Image 2025-08-27 at 8.15.38 AM (3).jpeg" class="card-img-top" alt="Repuestos Metálicos">
+                  <div class="card-body">
+                    <h5 class="card-title">Repuestos Metálicos</h5>
+                    <p class="card-text">Diversos repuestos industriales.</p>
+                    <p class="fw-bold">$400.000 COP</p>
+                    <button class="btn btn-outline-primary w-100 add-to-cart" data-name="Repuestos Metálicos" data-price="400000">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Computadores -->
+          <div class="tab-pane fade" id="computadores">
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <img src="pc.webp" class="card-img-top" alt="Computador de Escritorio">
+                  <div class="card-body">
+                    <h5 class="card-title">Computador de Escritorio</h5>
+                    <p class="card-text">Hp Core I7 -2600 500gb</p>
+                    <p class="fw-bold">$500.000 COP</p>
+                    <button class="btn btn-outline-primary w-100 add-to-cart" data-name="Computador de Escritorio" data-price="500000">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card h-100">
+                  <img src="pcusado.webp" class="card-img-top" alt="PC Empresarial">
+                  <div class="card-body">
+                    <h5 class="card-title">PC Empresarial</h5>
+                    <p class="card-text">Core i3, 4GB RAM, HDD 256GB.</p>
+                    <p class="fw-bold">$1.800.000 COP</p>
+                    <button class="btn btn-outline-primary w-100 add-to-cart" data-name="PC Empresarial" data-price="1800000">Agregar al carrito</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrito (Modal) -->
+  <div class="modal fade" id="cartModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Carrito de Compras</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group" id="cart-items"></ul>
+          <div class="mt-3 text-end">
+            <h5>Total: $<span id="cart-total">0</span> COP</h5>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Seguir comprando</button>
+          <button class="btn btn-success">Finalizar compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let cart = [];
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", () => {
+        const name = button.getAttribute("data-name");
+        const price = parseInt(button.getAttribute("data-price"));
+
+        cart.push({ name, price });
+        updateCart();
+      });
+    });
+
+    function updateCart() {
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.innerHTML = `${item.name} - $${item.price.toLocaleString()} COP 
+          <button class="btn btn-sm btn-danger" onclick="removeItem(${index})">Eliminar</button>`;
+        cartItems.appendChild(li);
+      });
+      cartTotal.textContent = total.toLocaleString();
+      cartCount.textContent = cart.length;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+  </script>
+</body>
+</html>

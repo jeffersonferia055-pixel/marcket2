@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReHub Marketplace</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-dark" href="#">
+        <i class="bi bi-circle-fill text-primary me-2"></i>ReHub
+      </a>
+      <div class="ms-auto">
+        <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#adminModal">
+          <i class="bi bi-gear"></i> Admin
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Productos Destacados -->
+  <section id="productos" class="container py-5">
+    <h2 class="fw-bold mb-4">Productos Disponibles</h2>
+    <div class="row g-4" id="product-list"></div>
+  </section>
+
+  <!-- Modal Admin -->
+  <div class="modal fade" id="adminModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Panel de Administración</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de registro -->
+          <form id="adminForm" class="mb-4">
+            <div class="row g-3">
+              <div class="col-md-4">
+                <label class="form-label">Nombre del producto</label>
+                <input type="text" class="form-control" id="productName" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Precio</label>
+                <input type="number" class="form-control" id="productPrice" required>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Imagen (URL)</label>
+                <input type="text" class="form-control" id="productImg" required>
+              </div>
+              <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Agregar</button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Lista de productos -->
+          <h6 class="fw-bold">Productos Registrados</h6>
+          <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductList"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+
+    // Renderizar productos en la tienda
+    function renderProducts() {
+      const productList = document.getElementById("product-list");
+      productList.innerHTML = "";
+      products.forEach((product, index) => {
+        productList.innerHTML += `
+          <div class="col-md-3">
+            <div class="card h-100">
+              <img src="${product.img}" class="card-img-top" alt="${product.name}">
+              <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="fw-bold">$${parseInt(product.price).toLocaleString()} COP</p>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Renderizar productos en la tabla de admin
+    function renderAdminProducts() {
+      const adminList = document.getElementById("adminProductList");
+      adminList.innerHTML = "";
+      products.forEach((product, index) => {
+        adminList.innerHTML += `
+          <tr>
+            <td><img src="${product.img}" width="60"></td>
+            <td>${product.name}</td>
+            <td>$${parseInt(product.price).toLocaleString()} COP</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="deleteProduct(${index})">
+                <i class="bi bi-trash"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    // Registrar producto
+    document.getElementById("adminForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("productName").value;
+      const price = document.getElementById("productPrice").value;
+      const img = document.getElementById("productImg").value;
+
+      const product = { name, price, img };
+      products.push(product);
+      localStorage.setItem("products", JSON.stringify(products));
+
+      renderProducts();
+      renderAdminProducts();
+
+      document.getElementById("adminForm").reset();
+    });
+
+    // Eliminar producto
+    function deleteProduct(index) {
+      products.splice(index, 1);
+      localStorage.setItem("products", JSON.stringify(products));
+      renderProducts();
+      renderAdminProducts();
+    }
+
+    // Inicializar
+    renderProducts();
+    renderAdminProducts();
+  </script>
+</body>
+</html>
